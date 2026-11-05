@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Enterprise workflow: several employees through one central proxy into multiple AI routes">
+  <defs>
+    <linearGradient id="gCard2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#181b26"/><stop offset="1" stop-color="#12141c"/>
+    </linearGradient>
+    <linearGradient id="gReq2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4ea1ff"/><stop offset="1" stop-color="#2e7bff"/>
+    </linearGradient>
+    <linearGradient id="gRes2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4a7"/><stop offset="1" stop-color="#14b8a6"/>
+    </linearGradient>
+    <linearGradient id="gProxy2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#231b33"/><stop offset="1" stop-color="#14121d"/>
+    </linearGradient>
+    <marker id="aReq2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4ea1ff"/>
+    </marker>
+    <marker id="aRes2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/>
+    </marker>
+    <marker id="aUp2" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,10 L5,0 L10,10 z" fill="#2dd4a7"/>
+    </marker>
+  </defs>
+
+  <!-- ======= employees ======= -->
+  <g font-family="'Inter',system-ui,sans-serif">
+    <!-- emp A -->
+    <rect x="24" y="40" width="215" height="118" rx="16" fill="url(#gCard2)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="24" y="40" width="215" height="3" rx="2" fill="#4ea1ff"/>
+    <circle cx="48" cy="62" r="4" fill="#4ea1ff"/>
+    <text x="62" y="67" font-size="14.5" font-weight="800" fill="#e8ecf4">Employee A</text>
+    <text x="48" y="92" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">agent · own Bearer key</text>
+    <rect x="48" y="108" width="94" height="20" rx="9" fill="rgba(78,161,255,0.10)" stroke="rgba(78,161,255,0.35)"/>
+    <text x="58" y="122" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#4ea1ff">key A-••••</text>
+
+    <!-- emp B -->
+    <rect x="24" y="210" width="215" height="118" rx="16" fill="url(#gCard2)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="24" y="210" width="215" height="3" rx="2" fill="#b48bfa"/>
+    <circle cx="48" cy="232" r="4" fill="#b48bfa"/>
+    <text x="62" y="237" font-size="14.5" font-weight="800" fill="#e8ecf4">Employee B</text>
+    <text x="48" y="262" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">agent · own Bearer key</text>
+    <rect x="48" y="278" width="94" height="20" rx="9" fill="rgba(180,139,250,0.10)" stroke="rgba(180,139,250,0.35)"/>
+    <text x="58" y="292" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#b48bfa">key B-••••</text>
+
+    <!-- emp C -->
+    <rect x="24" y="380" width="215" height="118" rx="16" fill="url(#gCard2)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="24" y="380" width="215" height="3" rx="2" fill="#2dd4a7"/>
+    <circle cx="48" cy="402" r="4" fill="#2dd4a7"/>
+    <text x="62" y="407" font-size="14.5" font-weight="800" fill="#e8ecf4">Employee C</text>
+    <text x="48" y="432" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">agent · own Bearer key</text>
+    <rect x="48" y="448" width="94" height="20" rx="9" fill="rgba(45,212,167,0.10)" stroke="rgba(45,212,167,0.35)"/>
+    <text x="58" y="462" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#2dd4a7">key C-••••</text>
+  </g>
+
+  <!-- ======= request arrows: employees -&gt; proxy ======= -->
+  <g fill="none">
+    <path d="M239,99 C350,99 350,222 454,222" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
+    <path d="M239,269 C350,269 350,270 454,270" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
+    <path d="M239,439 C350,439 350,318 454,318" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
+  </g>
+
+  <!-- ======= central proxy hexagon ======= -->
+  <g>
+    <path d="M600,105 L743,188 L743,352 L600,435 L457,352 L457,188 Z"
+          fill="url(#gProxy2)" stroke="rgba(180,139,250,0.55)" stroke-width="1.5"/>
+
+    <text x="600" y="64" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="15.5" font-weight="800" fill="#e8ecf4">Central AiRouterProxy</text>
+    <text x="600" y="84" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">one gateway · https://0.0.0.0:4000</text>
+
+    <g font-family="'JetBrains Mono',Consolas,monospace" font-size="9">
+      <rect x="486" y="204" width="108" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <circle cx="498" cy="215" r="3.4" fill="#22d3ee"/>
+      <text x="512" y="219" fill="#9aa3b5">multi-key auth</text>
+
+      <rect x="606" y="204" width="108" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <circle cx="618" cy="215" r="3.4" fill="#b48bfa"/>
+      <text x="632" y="219" fill="#9aa3b5">rate limit · IP</text>
+
+      <rect x="486" y="232" width="108" height="22" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(78,161,255,0.4)"/>
+      <circle cx="498" cy="243" r="3.4" fill="#4ea1ff"/>
+      <text x="512" y="247" fill="#e8ecf4">central redaction</text>
+
+      <rect x="606" y="232" width="108" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <circle cx="618" cy="243" r="3.4" fill="#f5a623"/>
+      <text x="632" y="247" fill="#9aa3b5">/admin surface</text>
+    </g>
+
+    <!-- route switcher hint -->
+    <text x="600" y="382" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="9.5" fill="#5c6577">longest-prefix · routes.json</text>
+  </g>
+
+  <!-- ======= request arrows: proxy -&gt; upstreams ======= -->
+  <g fill="none">
+    <path d="M743,225 C810,225 810,166 955,166" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
+    <path d="M743,315 C810,315 810,420 955,420" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
+  </g>
+  <g font-family="'JetBrains Mono',Consolas,monospace">
+    <rect x="792" y="194" width="110" height="20" rx="9" fill="#1a2942" stroke="rgba(78,161,255,0.35)"/>
+    <text x="803" y="208" font-size="9.5" fill="#4ea1ff">default route</text>
+    <rect x="792" y="335" width="110" height="20" rx="9" fill="#143329" stroke="rgba(45,212,167,0.35)"/>
+    <text x="803" y="349" font-size="9.5" fill="#2dd4a7">/openrouter</text>
+  </g>
+
+  <!-- ======= upstream cards ======= -->
+  <g>
+    <!-- AI Router -->
+    <rect x="958" y="118" width="232" height="96" rx="14" fill="url(#gCard2)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="958" y="118" width="232" height="3" rx="2" fill="#4ea1ff"/>
+    <circle cx="980" cy="140" r="4" fill="#4ea1ff"/>
+    <text x="994" y="145" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">AI Router</text>
+    <text x="978" y="170" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#9aa3b5">api.airrouter.ch</text>
+    <text x="978" y="186" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#5c6577">route key · pick · fallback</text>
+    <text x="978" y="202" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#5c6577">DeepSeek-V4-Flash · Qwen3.8 …</text>
+
+    <!-- OpenRouter -->
+    <rect x="958" y="384" width="232" height="96" rx="14" fill="url(#gCard2)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="958" y="384" width="232" height="3" rx="2" fill="#2dd4a7"/>
+    <circle cx="980" cy="406" r="4" fill="#2dd4a7"/>
+    <text x="994" y="411" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">OpenRouter</text>
+    <text x="978" y="436" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#9aa3b5">openrouter.ai/api</text>
+    <text x="978" y="452" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#5c6577">route key · 100+ models</text>
+  </g>
+
+  <!-- ======= response lane ======= -->
+  <g fill="none">
+    <path d="M1140,492 L1140,512 L600,512 L600,438" stroke="url(#gRes2)" stroke-width="2.4" marker-end="url(#aUp2)" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g font-family="'JetBrains Mono',Consolas,monospace">
+    <circle cx="180" cy="544" r="3.4" fill="#2dd4a7"/>
+    <text x="192" y="548" font-size="11" fill="#9aa3b5">each client gets its own streamed response</text>
+    <circle cx="600" cy="544" r="3.4" fill="#4ea1ff"/>
+    <text x="612" y="548" font-size="11" fill="#5c6577">one shared gateway · full visibility · zero secret drift</text>
+  </g>
+</svg>

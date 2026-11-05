@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Features — AiRouterProxy</title>
+<meta name="description" content="All AiRouterProxy features: multi-vendor redaction, fail-closed inspection, multi-key auth, rate limiting, multi-upstream routing, SSE streaming, admin surface and hot-reload config.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234ea1ff'/><text x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' font-weight='bold' fill='%2306070b'>AI</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="logo">AI</span>
+    <h1>AiRouter<span class="accent">Proxy</span></h1>
+    <span class="tag">local gateway</span>
+  </a>
+  <nav class="main">
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="features.html" class="active">Features</a>
+    <a href="security.html">Security</a>
+    <a href="getting-started.html">Getting started</a>
+  </nav>
+  <a class="btn gh" href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+</header>
+
+<main>
+  <section class="sec">
+    <h1 class="title" style="font-size:clamp(30px,5vw,44px)">Everything in the box</h1>
+    <div class="h2-rule"></div>
+    <p class="sub">A complete local gateway. No databases, no dashboards to host — a single Windows service with hot-reloadable config.</p>
+  </section>
+
+  <section class="sec">
+    <div class="grid g3">
+      <div class="card c-blue reveal">
+        <h3><span class="ico">✧</span>Multi-vendor redaction</h3>
+        <p>Formats validated against the canonical gitleaks rules: OpenAI <code>sk-…</code>, Anthropic, GitHub <code>ghp_/github_pat_</code>, AWS (real base32 keys), Google <code>AIza/ya29.</code>, GitLab, DigitalOcean, Hugging Face, Replicate, PyPI, Docker Hub, Discord, Twilio, SendGrid, Mailgun, Shopify, Azure, DB URLs…</p>
+      </div>
+      <div class="card c-blue reveal">
+        <h3><span class="ico">◈</span>Fixed mask</h3>
+        <p>The mask is always 6 bullets — it never reveals the real length of the secret, so an attacker learns nothing about format or size.</p>
+      </div>
+      <div class="card c-teal reveal">
+        <h3><span class="ico">◎</span>Fail-closed inspection</h3>
+        <p><code>415</code> / <code>400</code> / <code>413</code> for anything that isn’t clean, inspectable JSON. Uninspected bodies never leave the machine.</p>
+      </div>
+      <div class="card c-purple reveal">
+        <h3><span class="ico">⚿</span>Multi-key auth</h3>
+        <p><code>LocalKey</code> or <code>LocalKeys[]</code> — case-sensitive, literal values, empty keys rejected. Perfect for rotation and per-person keys.</p>
+      </div>
+      <div class="card c-cyan reveal">
+        <h3><span class="ico">⇄</span>Longest-prefix routing</h3>
+        <p>Segment-safe route matching with per-route keys. No traversal, no <code>%2f</code> bypasses.</p>
+      </div>
+      <div class="card c-amber reveal">
+        <h3><span class="ico">↯</span>Rate limit + lockout</h3>
+        <p>429 with <code>Retry-After</code>, per-IP windows, and a brute-force lockout. Thread-safe and covered by concurrency tests.</p>
+      </div>
+      <div class="card c-green reveal">
+        <h3><span class="ico">≋</span>SSE adapters</h3>
+        <p>OpenAI chat, OpenAI responses, Anthropic and a generic fallback — protocol-aware streaming end to end.</p>
+      </div>
+      <div class="card c-teal reveal">
+        <h3><span class="ico">☰</span>Admin surface</h3>
+        <p><code>/admin/health</code>, <code>/admin/endpoints</code>, <code>/admin/activity</code>, <code>/admin/refusals</code>, <code>/admin/logs</code> — every response masks secrets.</p>
+      </div>
+      <div class="card c-purple reveal">
+        <h3><span class="ico">↻</span>Hot-reload config</h3>
+        <p><code>routes.json</code> + <code>redaction.json</code> live in <code>config\</code> and reload without restarting the service.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="h2">Redaction layers (in one pass)</h2>
+    <div class="h2-rule"></div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n"></div>
+        <div><h4>Field names</h4><p><code>api_key</code>, <code>password</code>, <code>token</code>, <code>senha</code>… — only the value is masked. A <code>*_tokens</code> family is excluded so usage counters like <code>max_tokens</code> are never touched.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div><h4>Known vendor formats</h4><p>Everything in the list above, plus JWT, <code>Bearer &lt;value&gt;</code>, PEM private key blocks and URL-embedded credentials (<code>scheme://user:pass@…</code>).</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div><h4>Key: value context</h4><p>Config excerpts pasted into messages — <code>"LocalKey": "abc…"</code> or <code>aws_secret_access_key=…</code> — with safe delimiters so connection strings don’t swallow the next key.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div><h4>Long high-entropy tokens</h4><p>Optional (configurable) layer for URL-safe tokens ≥ 28 chars that look random — with an <code>allow</code> list to keep file names and IDs readable.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="note reveal">
+      <b>Exemptions never apply to known formats.</b> Whatever the config says, <code>sk-…</code>, <code>ghp_</code>, <code>AIza…</code>, JWT, <code>Bearer</code> and PEM are <i>always</i> masked. Image/binary payloads (<code>data:…;base64,…</code>) pass through untouched so vision payloads are never corrupted.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="brand">
+      <span class="logo">AI</span>
+      <span>AiRouter<span style="color:var(--blue)">Proxy</span></span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/blob/main/README.md" target="_blank" rel="noopener">Docs</a>
+    </div>
+    <div class="copy">© <span data-year>2025</span> jlKampos · <b>AiRouterProxy</b></div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

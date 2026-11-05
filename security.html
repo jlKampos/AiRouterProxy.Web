@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security — AiRouterProxy</title>
+<meta name="description" content="AiRouterProxy security principles: secrets never logged or returned, fixed masks, key hashes only, admin that never leaks, image payload immunity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234ea1ff'/><text x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' font-weight='bold' fill='%2306070b'>AI</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="logo">AI</span>
+    <h1>AiRouter<span class="accent">Proxy</span></h1>
+    <span class="tag">local gateway</span>
+  </a>
+  <nav class="main">
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="features.html">Features</a>
+    <a href="security.html" class="active">Security</a>
+    <a href="getting-started.html">Getting started</a>
+  </nav>
+  <a class="btn gh" href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+</header>
+
+<main>
+  <section class="sec">
+    <h1 class="title" style="font-size:clamp(30px,5vw,44px)">Security <span class="grad purple">principles</span></h1>
+    <div class="h2-rule"></div>
+    <p class="sub">The proxy is designed around a simple bias: if it can’t prove something is safe, it doesn’t happen.</p>
+  </section>
+
+  <section class="sec">
+    <div class="grid">
+      <div class="card c-blue reveal">
+        <h3><span class="ico">✕</span>Keys are never logged</h3>
+        <p>Refusals write to the event log as <code>PresentedLen · PresentedHash · ExpectedHash · KeyCount · UA</code> — hashes and lengths only, never the value itself.</p>
+      </div>
+      <div class="card c-blue reveal">
+        <h3><span class="ico">◈</span>Fixed-length mask</h3>
+        <p>Six bullets for every secret, regardless of length. The structure of your JSON is preserved; the shape of your secrets is not revealed.</p>
+      </div>
+      <div class="card c-teal reveal">
+        <h3><span class="ico">◎</span>Fail-closed by default</h3>
+        <p>Uninspectable bodies never go upstream. The safe answer to “I don’t know” is <code>415</code>/<code>400</code>, not “maybe pass it”.</p>
+      </div>
+      <div class="card c-purple reveal">
+        <h3><span class="ico">◈</span>Admin never leaks</h3>
+        <p><code>/admin/endpoints</code> shows the redaction state as bullets. Activity and logs never echo key material. The mask itself is never returned as a real value.</p>
+      </div>
+      <div class="card c-cyan reveal">
+        <h3><span class="ico">↯</span>Brute-force lockout</h3>
+        <p>10 failures in the window locks the source IP for 5 minutes — even correct keys are refused during lockout, so scanners can’t grind through your key space.</p>
+      </div>
+      <div class="card c-amber reveal">
+        <h3><span class="ico">▣</span>Images are exempt</h3>
+        <p>Base64 image payloads (<code>image_url.url</code>, Anthropic <code>source.data</code>) pass through untouched — scanning them would corrupt the model’s input. Known formats next to images are still masked.</p>
+      </div>
+      <div class="card c-green reveal">
+        <h3><span class="ico">↻</span>Deploy-safe config</h3>
+        <p>Secrets live only on the server (<code>appsettings.Server.json</code>, certs, local key). The repo carries neutral examples; <code>deploy-update.ps1</code> preserves what’s already installed.</p>
+      </div>
+      <div class="card c-purple reveal">
+        <h3><span class="ico">⚿</span>TLS for local traffic</h3>
+        <p>HTTPS on <code>:4000</code> even locally, via a PKCS12 round-trip that keeps Schannel happy. Integration tests pin against the self-signed cert deliberately.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="h2">What the admin surface reports</h2>
+    <div class="h2-rule"></div>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Endpoint</th><th>Purpose</th><th>Protection</th></tr></thead>
+        <tbody>
+          <tr><td><code>GET /admin/health</code></td><td>status, version, uptime</td><td>Bearer + rate limited</td></tr>
+          <tr><td><code>GET /admin/endpoints</code></td><td>routes, upstreams, redaction state</td><td>values always masked</td></tr>
+          <tr><td><code>GET /admin/activity</code></td><td>request log (redacted counts)</td><td>never verbose content</td></tr>
+          <tr><td><code>GET /admin/refusals</code></td><td>auth refusals only</td><td>hashes, no keys</td></tr>
+          <tr><td><code>GET/DELETE /admin/logs</code></td><td>event log access</td><td>Bearer only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="note teal reveal">
+      <b>Fail-closed is not paranoid — it’s the contract.</b> “We passed it through and hoped” is a leak waiting to happen. AiRouterProxy would rather answer <code>400</code> than gamble a secret.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="brand">
+      <span class="logo">AI</span>
+      <span>AiRouter<span style="color:var(--blue)">Proxy</span></span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/blob/main/README.md" target="_blank" rel="noopener">Docs</a>
+    </div>
+    <div class="copy">© <span data-year>2025</span> jlKampos · <b>AiRouterProxy</b></div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

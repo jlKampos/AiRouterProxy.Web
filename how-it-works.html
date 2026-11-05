@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it works — AiRouterProxy</title>
+<meta name="description" content="Walk through the AiRouterProxy pipeline: rate limiting, local auth, fail-closed inspection, redaction, routing and SSE streaming.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234ea1ff'/><text x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' font-weight='bold' fill='%2306070b'>AI</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="logo">AI</span>
+    <h1>AiRouter<span class="accent">Proxy</span></h1>
+    <span class="tag">local gateway</span>
+  </a>
+  <nav class="main">
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html" class="active">How it works</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="features.html">Features</a>
+    <a href="security.html">Security</a>
+    <a href="getting-started.html">Getting started</a>
+  </nav>
+  <a class="btn gh" href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+</header>
+
+<main>
+  <section class="sec">
+    <h1 class="title" style="font-size:clamp(30px,5vw,44px)">A request, walk by walk</h1>
+    <div class="h2-rule"></div>
+    <p class="sub">Every request that enters the proxy passes the same ordered pipeline. Nothing is forwarded that did not pass every gate.</p>
+  </section>
+
+  <section class="sec">
+    <div class="diagram-frame reveal">
+      <img src="assets/diagram-local.svg" alt="Local workflow diagram: agent through AiRouterProxy to AI Router and two models" width="1320" height="470">
+    </div>
+    <div class="diagram-caption">One local client · one gateway · one or two models</div>
+  </section>
+
+  <section class="sec">
+    <h2 class="h2">The pipeline (in order)</h2>
+    <div class="h2-rule"></div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n"></div>
+        <div>
+          <h4>Rate limit per client IP</h4>
+          <p>Checked <i>before</i> authentication, so floods and brute-force never reach the router. Over the window → <code>429</code> + <code>Retry-After</code>.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div>
+          <h4>Local authentication</h4>
+          <p>Bearer <code>LocalKey</code> or a <code>LocalKeys</code> list (multi-key rotation). Missing or wrong key → <code>401</code>. Each refusal writes to the event log: lengths and hashes, <b style="color:var(--text)">never the key</b>.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div>
+          <h4>Method + route resolution</h4>
+          <p>Only <code>GET</code>/<code>POST</code> (<code>405</code> otherwise). The route table matches by <b style="color:var(--text)">longest prefix with segment boundary</b>, swaps in that route’s key and rewrites the path. No route → <code>404</code>; route without key → <code>502</code>.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div>
+          <h4>Fail-closed body inspection</h4>
+          <p>Only JSON passes. <code>text/plain</code>/unknown → <code>415</code>; invalid JSON → <code>400</code>; body over the limit → <code>413</code>. A body that could not be inspected is <b style="color:var(--text)">never forwarded</b>.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div>
+          <h4>Secret redaction</h4>
+          <p>Four layers: sensitive <b style="color:var(--text)">field names</b>, <b style="color:var(--text)">known formats</b> (<code>sk-…</code>, <code>ghp_</code>, <code>AIza…</code>, <code>glpat-</code>, <code>dop_v1_</code>, PyPI, Discord, Azure…), <code>key: value</code> context and long high-entropy tokens. Every match becomes a fixed <code>••••••</code> — the structure is never touched.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="n"></div>
+        <div>
+          <h4>Forward + SSE streaming</h4>
+          <p>The request goes out through a pooled client; <code>X-AIRouter-Redacted</code> and a notice signal any redaction, and OpenAI / Anthropic / generic SSE is streamed back token by token.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="h2">Routing table (as configured today)</h2>
+    <div class="h2-rule"></div>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Prefix</th><th>Upstream</th><th>Key</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>""</code> (default)</td><td><code>https://api.airrouter.ch</code></td><td>default route key</td><td><code>/v1/models</code>, <code>/v1/chat/completions</code>…</td></tr>
+          <tr><td><code>/openrouter</code></td><td><code>https://openrouter.ai/api</code></td><td><code>OPENROUTER</code></td><td>100+ models</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px" class="note teal"><b>Hot reload:</b> <code>routes.json</code> and <code>redaction.json</code> are picked up live — no service restart needed. Rate-limit settings are read at startup.</p>
+  </section>
+
+  <section class="sec">
+    <div class="note reveal">
+      <b>Always visible:</b> the proxy never stores the request body, never stores keys, and the <code>/admin</code> surface always reports the redaction state <i>masked</i> — bullets, never values.
+    </div>
+    <div class="chips" style="margin-top:16px">
+      <a class="chip" href="features.html" style="text-decoration:none">→ Features</a>
+      <a class="chip" href="security.html" style="text-decoration:none">→ Security principles</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="brand">
+      <span class="logo">AI</span>
+      <span>AiRouter<span style="color:var(--blue)">Proxy</span></span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/blob/main/README.md" target="_blank" rel="noopener">Docs</a>
+    </div>
+    <div class="copy">© <span data-year>2025</span> jlKampos · <b>AiRouterProxy</b></div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

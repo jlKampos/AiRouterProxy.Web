@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AiRouterProxy — a local security gateway for AI coding agents</title>
+<meta name="description" content="AiRouterProxy is a fail-closed HTTPS gateway that sits between your coding agents and the AI providers: it authenticates, routes, rate-limits and redacts secrets before anything leaves your machine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234ea1ff'/><text x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' font-weight='bold' fill='%2306070b'>AI</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="logo">AI</span>
+    <h1>AiRouter<span class="accent">Proxy</span></h1>
+    <span class="tag">local gateway</span>
+  </a>
+  <nav class="main">
+    <a href="index.html" class="active">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="features.html">Features</a>
+    <a href="security.html">Security</a>
+    <a href="getting-started.html">Getting started</a>
+  </nav>
+  <a class="btn gh" href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+</header>
+
+<main class="wide">
+  <section class="hero sec">
+    <div class="hero-head">
+      <div class="badges">
+        <span class="badge b-blue"><span class="dot"></span>v2.1.0</span>
+        <span class="badge b-purple"><span class="dot"></span>Open Source</span>
+        <span class="badge b-teal"><span class="dot"></span>Local-first</span>
+        <span class="badge"><span class="dot"></span>HTTPS&nbsp;·&nbsp;:4000</span>
+      </div>
+      <h1 class="title">Your coding agent talks to the models.<br><span class="grad">Your secrets never leave the machine.</span></h1>
+      <p class="sub">
+        AiRouterProxy is a fail-closed HTTPS gateway between your local AI coding agents and the
+        model providers. It authenticates every caller, routes by prefix, rate-limits per client,
+        streams SSE back — and <b style="color:var(--text)">redacts secrets</b> before anything goes upstream.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="getting-started.html">Get started</a>
+        <a class="btn" href="how-it-works.html">See how it works</a>
+        <a class="btn gh" href="https://github.com/jlKampos/AiRouterProxy/releases" target="_blank" rel="noopener">Releases&nbsp;↗</a>
+      </div>
+    </div>
+
+    <div class="hero-facts">
+      <div class="fact"><div class="k">6<em>+</em></div><div class="v">security layers in one pipeline</div></div>
+      <div class="fact"><div class="k">24<em>+</em></div><div class="v">vendor formats masked on sight</div></div>
+      <div class="fact"><div class="k">266<em>+</em></div><div class="v">offline unit checks</div></div>
+      <div class="fact"><div class="k">24<em>/24</em></div><div class="v">black-box integration checks</div></div>
+    </div>
+  </section>
+
+  <!-- ================= features preview ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2 class="h2">Built like a security product,<br>used like a local proxy</h2>
+      <div class="h2-rule"></div>
+      <p>One small Windows service. A pipeline that never forwards a body it could not inspect.</p>
+    </div>
+    <div class="grid">
+      <div class="card c-blue reveal">
+        <h3><span class="ico">✧</span>Secret redaction</h3>
+        <p>OpenAI, Anthropic, GitHub, AWS, Hugging Face, PyPI, Docker, Stripe, SendGrid, Azure, databases… masked with a fixed <span class="mono">••••••</span> before the request goes out.</p>
+      </div>
+      <div class="card c-teal reveal">
+        <h3><span class="ico">◎</span>Fail-closed inspection</h3>
+        <p>Only bodies that pass the content-type policy and JSON parsing are ever forwarded. Unknown type → <span class="mono">415</span>, invalid JSON → <span class="mono">400</span>, oversized → <span class="mono">413</span>.</p>
+      </div>
+      <div class="card c-purple reveal">
+        <h3><span class="ico">⚿</span>Auth with keys just for you</h3>
+        <p>Bearer <span class="mono">LocalKey</span> or a full <span class="mono">LocalKeys</span> list for rotation. Wrong key, wrong length, brute-force attempts — all refused and logged (never the key value).</p>
+      </div>
+      <div class="card c-cyan reveal">
+        <h3><span class="ico">⇄</span>Multi-upstream routing</h3>
+        <p>Longest-prefix <span class="mono">routes.json</span>: default route to your AI Router, <span class="mono">/openrouter</span> to OpenRouter — each with its own key and allowed-path guards.</p>
+      </div>
+      <div class="card c-amber reveal">
+        <h3><span class="ico">↯</span>Rate limit + lockout</h3>
+        <p>Per-IP windows with <span class="mono">429</span> + <span class="mono">Retry-After</span>, and a real lockout after repeated failures. Floods never reach your upstream.</p>
+      </div>
+      <div class="card c-green reveal">
+        <h3><span class="ico">≋</span>SSE streaming</h3>
+        <p>OpenAI chat, OpenAI responses, Anthropic and generic protocol adapters — tokens stream back to your agent exactly as they come in, redacted and annotated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= local diagram ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2 class="h2">For you — one client, a couple of models</h2>
+      <div class="h2-rule"></div>
+      <p>Run it on your laptop. One agent, one gateway, one or two models, all the guarantees.</p>
+    </div>
+    <div class="diagram-frame reveal">
+      <img src="assets/diagram-local.svg" alt="Local workflow: coding agent through AiRouterProxy into the AI Router and two models" width="1320" height="470">
+    </div>
+    <div class="chips">
+      <span class="chip"><span class="d" style="--c:var(--blue)"></span><code>HTTPS&nbsp;:4000</code> local only</span>
+      <span class="chip"><span class="d" style="--c:var(--purple)"></span><code>Bearer</code> auth</span>
+      <span class="chip"><span class="d" style="--c:var(--amber)"></span><code>fail-closed</code> inspection</span>
+      <span class="chip"><span class="d" style="--c:var(--teal)"></span><code>SSE</code> streamed response</span>
+    </div>
+    <p style="margin-top:16px"><a class="btn" href="how-it-works.html">Walk through the pipeline →</a></p>
+  </section>
+
+  <!-- ================= enterprise teaser ================= -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2 class="h2">For your team — one gateway, many LLMs</h2>
+      <div class="h2-rule"></div>
+      <p>A single central proxy gives every engineer their own key, per-client rate limits, a company-wide redaction policy and full visibility through <span class="mono">/admin</span> — while the routes diverge into different AI providers.</p>
+    </div>
+    <div class="diagram-frame reveal">
+      <img src="assets/diagram-enterprise.svg" alt="Enterprise workflow: three employees through one central proxy into different AI routes" width="1320" height="560">
+    </div>
+    <p style="margin-top:16px"><a class="btn" href="enterprise.html">Enterprise deep-dive →</a></p>
+  </section>
+
+  <!-- ================= quote strip ================= -->
+  <section class="sec">
+    <div class="wrap reveal" style="text-align:center">
+      <p style="margin:0;font-size:18px;color:var(--text);font-weight:700;font-style:italic">
+        “The proxy never logs the key, never returns it, never masks the JSON structure —
+        it just quietly makes sure no secret ever reaches the model provider.”
+      </p>
+      <div class="chips" style="justify-content:center">
+        <span class="chip"><span class="d" style="--c:var(--teal)"></span>fixed 6-char mask</span>
+        <span class="chip"><span class="d" style="--c:var(--blue)"></span>structure preserved</span>
+        <span class="chip"><span class="d" style="--c:var(--purple)"></span>hot-reload config</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="brand">
+      <span class="logo">AI</span>
+      <span>AiRouter<span style="color:var(--blue)">Proxy</span></span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/jlKampos/AiRouterProxy" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/jlKampos/AiRouterProxy/blob/main/README.md" target="_blank" rel="noopener">Docs</a>
+    </div>
+    <div class="copy">© <span data-year>2025</span> jlKampos · <b>AiRouterProxy</b> — local security gateway for AI coding agents</div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
