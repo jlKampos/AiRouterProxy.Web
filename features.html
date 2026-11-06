@@ -84,7 +84,7 @@
     <div class="steps">
       <div class="step reveal">
         <div class="n"></div>
-        <div><h4>Field names</h4><p><code>api_key</code>, <code>password</code>, <code>token</code>, <code>senha</code>… — only the value is masked. A <code>*_tokens</code> family is excluded so usage counters like <code>max_tokens</code> are never touched.</p></div>
+        <div><h4>Field names</h4><p><code>api_key</code>, <code>password</code>, <code>token</code>, <code>senha</code>… — only the value is masked. Matching is <b style="color:var(--text)">convention-agnostic</b>: <code>ApiKey</code>/<code>API_KEY</code>/<code>api-key</code>/<code>apikey</code> are all caught, plus the <code>auth</code>/<code>session</code>/<code>id</code> token and JWT/signing-key families. A <code>*_tokens</code> family is excluded so usage counters like <code>max_tokens</code> are never touched.</p></div>
       </div>
       <div class="step reveal">
         <div class="n"></div>
@@ -92,7 +92,7 @@
       </div>
       <div class="step reveal">
         <div class="n"></div>
-        <div><h4>Key: value context</h4><p>Config excerpts pasted into messages — <code>"LocalKey": "abc…"</code> or <code>aws_secret_access_key=…</code> — with safe delimiters so connection strings don’t swallow the next key.</p></div>
+        <div><h4>Key: value context</h4><p>Config excerpts pasted into messages — <code>"LocalKey": "abc…"</code> or <code>aws_secret_access_key=…</code> — with safe delimiters so connection strings don’t swallow the next key. Context detection is also convention-agnostic (<code>AuthToken</code>, <code>session-token</code>, <code>jwt_key</code>…).</p></div>
       </div>
       <div class="step reveal">
         <div class="n"></div>

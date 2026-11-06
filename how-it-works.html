@@ -80,7 +80,7 @@
         <div class="n"></div>
         <div>
           <h4>Secret redaction</h4>
-          <p>Four layers: sensitive <b style="color:var(--text)">field names</b>, <b style="color:var(--text)">known formats</b> (<code>sk-…</code>, <code>ghp_</code>, <code>AIza…</code>, <code>glpat-</code>, <code>dop_v1_</code>, PyPI, Discord, Azure…), <code>key: value</code> context and long high-entropy tokens. Every match becomes a fixed <code>••••••</code> — the structure is never touched.</p>
+          <p>Four layers: sensitive <b style="color:var(--text)">field names</b> (convention-agnostic — <code>api_key</code>, <code>ApiKey</code>, <code>API-KEY</code>, <code>apikey</code> all match, plus <code>auth</code>/<code>session</code>/<code>id</code> token and JWT/signing-key families), <b style="color:var(--text)">known formats</b> (<code>sk-…</code>, <code>ghp_</code>, <code>AIza…</code>, <code>glpat-</code>, <code>dop_v1_</code>, PyPI, Discord, Azure…), <code>key: value</code> context and long high-entropy tokens. Every match becomes a fixed <code>••••••</code> — the structure is never touched.</p>
         </div>
       </div>
       <div class="step reveal">
@@ -106,6 +106,7 @@
       </table>
     </div>
     <p style="margin-top:14px" class="note teal"><b>Hot reload:</b> <code>routes.json</code> and <code>redaction.json</code> are picked up live — no service restart needed. Rate-limit settings are read at startup.</p>
+    <p style="margin-top:10px" class="note teal"><b>Precedence:</b> config files load in order — <code>appsettings.json</code>, <code>appsettings.Server.json</code>, then <code>redaction.json</code>/<code>routes.json</code>. Later files win <i>per key</i> across both. In practice: tune redaction in <code>redaction.json</code> and it beats any <code>appsettings.json</code> default for the same key.</p>
   </section>
 
   <section class="sec">
