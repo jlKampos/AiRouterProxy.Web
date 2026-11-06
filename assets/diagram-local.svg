@@ -12,6 +12,8 @@
     <linearGradient id="gProxy" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#1c2131"/><stop offset="1" stop-color="#12141d"/>
     </linearGradient>
+    <clipPath id="clipAgent"><rect x="28" y="120" width="215" height="130" rx="16"/></clipPath>
+    <clipPath id="clipRouter"><rect x="850" y="120" width="190" height="130" rx="16"/></clipPath>
     <marker id="aReq" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#4ea1ff"/>
     </marker>
@@ -26,7 +28,7 @@
   <!-- ======= agent node ======= -->
   <g>
     <rect x="28" y="120" width="215" height="130" rx="16" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
-    <rect x="28" y="120" width="215" height="3" rx="2" fill="#4ea1ff"/>
+    <rect x="28" y="120" width="215" height="3" fill="#4ea1ff" clip-path="url(#clipAgent)"/>
     <text x="52" y="152" font-family="'Inter',system-ui,sans-serif" font-size="15" font-weight="800" fill="#e8ecf4">Your coding agent</text>
     <text x="52" y="172" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">OpenCode · Cursor · Claude Code</text>
     <text x="52" y="206" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">sends the prompt</text>
@@ -48,28 +50,28 @@
     <text x="490" y="88" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">https://0.0.0.0:4000</text>
 
     <!-- layer chips -->
-    <g font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5">
-      <rect x="416" y="112" width="148" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+    <g font-family="'JetBrains Mono',Consolas,monospace" font-size="10">
+      <rect x="416" y="112" width="168" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
       <circle cx="428" cy="123" r="3.4" fill="#22d3ee"/>
       <text x="442" y="127" fill="#9aa3b5">rate limit · IP</text>
 
-      <rect x="416" y="140" width="148" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <rect x="416" y="140" width="168" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
       <circle cx="428" cy="151" r="3.4" fill="#b48bfa"/>
       <text x="442" y="155" fill="#9aa3b5">Bearer · multi-key</text>
 
-      <rect x="416" y="168" width="148" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <rect x="416" y="168" width="168" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
       <circle cx="428" cy="179" r="3.4" fill="#f5a623"/>
       <text x="442" y="183" fill="#9aa3b5">inspection · fail-closed</text>
 
-      <rect x="416" y="196" width="148" height="22" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(78,161,255,0.4)"/>
+      <rect x="416" y="196" width="168" height="22" rx="7" fill="rgba(255,255,255,0.06)" stroke="rgba(78,161,255,0.4)"/>
       <circle cx="428" cy="207" r="3.4" fill="#4ea1ff"/>
       <text x="442" y="211" fill="#e8ecf4">redaction · ••••••</text>
 
-      <rect x="416" y="224" width="148" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <rect x="416" y="224" width="168" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
       <circle cx="428" cy="235" r="3.4" fill="#2dd4a7"/>
       <text x="442" y="239" fill="#9aa3b5">route · routes.json</text>
 
-      <rect x="416" y="252" width="148" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
+      <rect x="416" y="252" width="168" height="22" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
       <circle cx="428" cy="263" r="3.4" fill="#22c55e"/>
       <text x="442" y="267" fill="#9aa3b5">SSE streaming</text>
     </g>
@@ -79,14 +81,14 @@
   <g>
     <path d="M637,190 L847,190" stroke="url(#gReq)" stroke-width="2.5" fill="none" marker-end="url(#aReq)" stroke-linecap="round"/>
     <text x="656" y="176" font-family="'JetBrains Mono',Consolas,monospace" font-size="11" fill="#22d3ee">POST /v1/chat/completions</text>
-    <rect x="652" y="210" width="188" height="21" rx="10" fill="rgba(78,161,255,0.10)" stroke="rgba(78,161,255,0.35)"/>
+    <rect x="652" y="210" width="206" height="21" rx="10" fill="rgba(78,161,255,0.10)" stroke="rgba(78,161,255,0.35)"/>
     <text x="666" y="225" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#e8ecf4">Authorization: Bearer <tspan fill="#4ea1ff">sk-••••••</tspan></text>
   </g>
 
   <!-- ======= AI Router node ======= -->
   <g>
     <rect x="850" y="120" width="190" height="130" rx="16" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
-    <rect x="850" y="120" width="190" height="3" rx="2" fill="#b48bfa"/>
+    <rect x="850" y="120" width="190" height="3" fill="#b48bfa" clip-path="url(#clipRouter)"/>
     <text x="874" y="152" font-family="'Inter',system-ui,sans-serif" font-size="15" font-weight="800" fill="#e8ecf4">AI Router</text>
     <text x="874" y="172" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">api.airouter.ch</text>
     <text x="874" y="206" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">pick · load-balance</text>

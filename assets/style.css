@@ -254,13 +254,13 @@ h2.h2 {
   font: 13px/1.7 var(--mono);
   overflow-x: auto;
 }
+.code pre { margin: 0; min-width: 0; }
 .code .c { color: var(--faint); }
 .code .cmt { color: var(--faint); font-style: italic; }
 .code .b { color: var(--blue); }
 .code .g { color: var(--teal); }
 .code .p { color: var(--purple); }
 .code .a { color: var(--amber); }
-.code pre { margin: 0; }
 .code.with-title { border-radius: var(--radius-sm); }
 .code .title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
 
@@ -284,7 +284,7 @@ h2.h2 {
 }
 
 /* ---------- steps ---------- */
-.steps { counter-reset: step; display: grid; gap: 14px; }
+.steps { counter-reset: step; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
 .step {
   display: flex; gap: 16px;
   background: linear-gradient(180deg, var(--card-2), var(--card));
@@ -303,6 +303,7 @@ h2.h2 {
   box-shadow: 0 0 16px rgba(78, 161, 255, 0.3);
 }
 .step .n::before { content: counter(step); }
+.step > div { min-width: 0; }
 .step h4 { margin: 0 0 4px; font-size: 15px; font-weight: 700; }
 .step p { margin: 0; color: var(--muted); font-size: 13.5px; }
 .step code { font-family: var(--mono); font-size: 12px; color: var(--cyan); background: rgba(34,211,238,.08); padding: 1px 6px; border-radius: 6px; }
@@ -321,7 +322,8 @@ h2.h2 {
 .chip code { font-family: var(--mono); color: var(--text); }
 
 /* ---------- two-col ---------- */
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.cols .wrap { min-width: 0; }
 @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
 
 /* ---------- table ---------- */
@@ -391,4 +393,8 @@ footer .copy b { color: var(--muted); }
 @media (max-width: 560px) {
   h1.title { font-size: 32px; }
   .hero .cta .btn { flex: 1 1 100%; justify-content: center; }
+  nav.main a { padding: 7px 9px; font-size: 12.5px; }
+  .step { padding: 16px 14px; gap: 12px; }
+  .code { font-size: 11.5px; padding: 12px 14px; }
+  .cols { gap: 16px; }
 }
