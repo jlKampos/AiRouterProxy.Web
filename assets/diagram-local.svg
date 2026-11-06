@@ -88,7 +88,7 @@
     <rect x="850" y="120" width="190" height="130" rx="16" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
     <rect x="850" y="120" width="190" height="3" rx="2" fill="#b48bfa"/>
     <text x="874" y="152" font-family="'Inter',system-ui,sans-serif" font-size="15" font-weight="800" fill="#e8ecf4">AI Router</text>
-    <text x="874" y="172" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">api.airrouter.ch</text>
+    <text x="874" y="172" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">api.airouter.ch</text>
     <text x="874" y="206" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">pick · load-balance</text>
     <circle cx="874" cy="136" r="4" fill="#b48bfa"/>
   </g>

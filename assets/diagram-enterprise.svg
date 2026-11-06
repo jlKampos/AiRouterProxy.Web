@@ -109,7 +109,7 @@
     <rect x="958" y="118" width="232" height="3" rx="2" fill="#4ea1ff"/>
     <circle cx="980" cy="140" r="4" fill="#4ea1ff"/>
     <text x="994" y="145" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">AI Router</text>
-    <text x="978" y="170" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#9aa3b5">api.airrouter.ch</text>
+    <text x="978" y="170" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#9aa3b5">api.airouter.ch</text>
     <text x="978" y="186" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#5c6577">route key · pick · fallback</text>
     <text x="978" y="202" font-family="'JetBrains Mono',Consolas,monospace" font-size="10" fill="#5c6577">DeepSeek-V4-Flash · Qwen3.8 …</text>
 
