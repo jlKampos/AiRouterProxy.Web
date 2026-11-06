@@ -23,8 +23,8 @@
     <marker id="aRes2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/>
     </marker>
-    <marker id="aUp2" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0,10 L5,0 L10,10 z" fill="#2dd4a7"/>
+    <marker id="aUp2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/>
     </marker>
   </defs>
 
@@ -129,7 +129,7 @@
 
   <!-- ======= response lane ======= -->
   <g fill="none">
-    <path d="M1140,492 L1140,512 L600,512 L600,437" stroke="url(#gRes2)" stroke-width="2.4" marker-end="url(#aUp2)" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1140,492 L1140,512 L600,512 L600,438" stroke="url(#gRes2)" stroke-width="2.4" marker-end="url(#aUp2)" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <g font-family="'JetBrains Mono',Consolas,monospace">
     <circle cx="180" cy="544" r="3.4" fill="#2dd4a7"/>
