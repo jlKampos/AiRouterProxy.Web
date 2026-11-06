@@ -65,35 +65,81 @@
     <path d="M239,439 C350,439 350,318 446,318" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
   </g>
 
-  <!-- ======= central proxy hexagon ======= -->
-  <g>
-    <path d="M600,105 L750,188 L750,352 L600,435 L450,352 L450,188 Z"
-          fill="url(#gProxy2)" stroke="rgba(180,139,250,0.55)" stroke-width="1.5"/>
+ <!-- ======= central proxy hexagon ======= -->
+<g>
+  <path d="M600,105 L750,188 L750,352 L600,435 L450,352 L450,188 Z"
+        fill="url(#gProxy2)"
+        stroke="rgba(180,139,250,0.55)"
+        stroke-width="1.5"/>
 
-    <text x="600" y="64" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="15.5" font-weight="800" fill="#e8ecf4">Central AiRouterProxy</text>
-    <text x="600" y="84" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">one gateway · https://0.0.0.0:4000</text>
+  <text x="600" y="64"
+        text-anchor="middle"
+        font-family="'Inter',system-ui,sans-serif"
+        font-size="15.5"
+        font-weight="800"
+        fill="#e8ecf4">
+    Central AiRouterProxy
+  </text>
 
-    <g font-family="'JetBrains Mono',Consolas,monospace" font-size="10">
-      <rect x="464" y="204" width="134" height="22" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
-      <circle cx="478" cy="215" r="3.4" fill="#22d3ee"/>
-      <text x="490" y="219" fill="#9aa3b5">multi-key auth</text>
+  <text x="600" y="84"
+        text-anchor="middle"
+        font-family="'JetBrains Mono',Consolas,monospace"
+        font-size="10.5"
+        fill="#9aa3b5">
+    one gateway · https://0.0.0.0:4000
+  </text>
 
-      <rect x="602" y="204" width="134" height="22" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
-      <circle cx="616" cy="215" r="3.4" fill="#b48bfa"/>
-      <text x="628" y="219" fill="#9aa3b5">rate limit · IP</text>
+  <g font-family="'JetBrains Mono',Consolas,monospace"
+     font-size="10">
 
-      <rect x="464" y="232" width="134" height="22" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(78,161,255,0.4)"/>
-      <circle cx="478" cy="243" r="3.4" fill="#4ea1ff"/>
-      <text x="490" y="247" fill="#e8ecf4">central redaction</text>
+    <!-- Row 1 -->
+    <rect x="464" y="240"
+          width="134" height="22" rx="8"
+          fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.09)"/>
+    <circle cx="478" cy="251" r="3.4" fill="#22d3ee"/>
+    <text x="490" y="255" fill="#9aa3b5">
+      multi-key auth
+    </text>
 
-      <rect x="602" y="232" width="134" height="22" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.09)"/>
-      <circle cx="616" cy="243" r="3.4" fill="#f5a623"/>
-      <text x="628" y="247" fill="#9aa3b5">/admin surface</text>
-    </g>
+    <rect x="602" y="240"
+          width="134" height="22" rx="8"
+          fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.09)"/>
+    <circle cx="616" cy="251" r="3.4" fill="#b48bfa"/>
+    <text x="628" y="255" fill="#9aa3b5">
+      rate limit · IP
+    </text>
 
-    <!-- route switcher hint -->
-    <text x="600" y="382" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="9.5" fill="#5c6577">longest-prefix · routes.json</text>
+    <!-- Row 2 -->
+    <rect x="464" y="272"
+          width="134" height="22" rx="8"
+          fill="rgba(255,255,255,0.06)"
+          stroke="rgba(78,161,255,0.4)"/>
+    <circle cx="478" cy="283" r="3.4" fill="#4ea1ff"/>
+    <text x="490" y="287" fill="#e8ecf4">
+      central redaction
+    </text>
+
+    <rect x="602" y="272"
+          width="134" height="22" rx="8"
+          fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.09)"/>
+    <circle cx="616" cy="283" r="3.4" fill="#f5a623"/>
+    <text x="628" y="287" fill="#9aa3b5">
+      /admin surface
+    </text>
+
   </g>
+
+  <text x="600" y="338"
+        text-anchor="middle"
+        font-family="'JetBrains Mono',Consolas,monospace"
+        font-size="9.5"
+        fill="#5c6577">
+    longest-prefix · routes.json
+  </text>
+</g>
 
   <!-- ======= request arrows: proxy -&gt; upstreams ======= -->
   <g fill="none">
