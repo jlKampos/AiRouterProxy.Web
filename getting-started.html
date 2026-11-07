@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Getting started — AiRouterProxy</title>
-<meta name="description" content="Install and run AiRouterProxy: publish self-contained win-x64, deploy-update.ps1, configure routes and redaction, verify via /admin/health.">
+<meta name="description" content="Install and run AiRouterProxy: publish self-contained win-x64, deploy with the interactive menu (proxy-menu.ps1) or deploy-update.ps1, configure routes and redaction, verify via /admin/health.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
@@ -52,8 +52,11 @@
         <div class="n"></div>
         <div>
           <h4>Deploy (Windows Service)</h4>
-          <p>The deploy script stops the service, copies the build, preserves your config/certs and starts the service again — needs elevation once:</p>
+          <p>The quickest way is the <b style="color:var(--text)">interactive menu</b> — build, deploy, verify, keys and the event log in one tool (options 1/3/8 self-elevate via UAC):</p>
+          <div class="code" style="margin-top:10px"><pre><span class="b">powershell -ExecutionPolicy Bypass -File .\scripts\proxy-menu.ps1</span></pre></div>
+          <p style="margin-top:8px">Pick <b style="color:var(--text)">1</b> (build + deploy + verify) or <b style="color:var(--text)">3</b> (deploy only) — the engine stops the service, copies the build, preserves your config/certs and starts it again. The same call directly (elevation once):</p>
           <div class="code" style="margin-top:10px"><pre><span class="b">powershell -ExecutionPolicy Bypass -File .\scripts\deploy-update.ps1</span> <span class="a">-DeployDir</span> "C:\Services\AiRouterProxy"</pre></div>
+          <p style="margin-top:8px"><b style="color:var(--text)">First install is automatic:</b> when the service is not registered yet, the deploy registers it itself (auto-start, LocalSystem) — no manual <code>sc.exe</code> steps. Use <span class="mono" style="color:var(--cyan)">-DeployDir</span> / <span class="mono" style="color:var(--cyan)">-ServiceName</span> to install a sandbox next to production.</p>
           <p style="margin-top:8px">Config lives in a <span class="mono" style="color:var(--cyan)">config\</span> subfolder next to the exe (<code>appsettings.json</code>, <code>routes.json</code>, <code>redaction.json</code>, TLS certs).</p>
         </div>
       </div>
@@ -62,7 +65,7 @@
         <div>
           <h4>Verify with your local key</h4>
           <div class="code" style="margin-top:10px"><pre><span class="g">$</span> curl -k https://localhost:4000/admin/health <span class="a">-H</span> "Authorization: Bearer <span class="c">&lt;LocalKey&gt;</span>"
-<span class="cmt"># {"status":"ok","version":"2.3.0","uptimeSec":…}</span></pre></div>
+<span class="cmt"># {"status":"ok","version":"2.3.1","uptimeSec":…}</span></pre></div>
         </div>
       </div>
       <div class="step reveal">
@@ -123,6 +126,9 @@
   <section class="sec">
     <div class="note amber reveal">
       <b>Keep config on the server.</b> <code>appsettings.Server.json</code>, TLS certs and the local key live only on the deployed machine — never in the repo. The deploy script preserves them across updates; after a deploy, restore the live <code>redaction.json</code> if you keep internal <code>allow</code> prefixes.
+    </div>
+    <div class="note amber reveal" style="margin-top:10px">
+      <b>Windows 11 / Smart App Control:</b> the proxy is built locally and is <b style="color:var(--text)">not signed</b>, so if Smart App Control is <b style="color:var(--text)">On</b> Windows blocks it at startup — the service registers but stays <code>Stopped</code> (Event Log: CodeIntegrity 3033/3077, "Enterprise signing level"). Disable it in <b style="color:var(--text)">Windows Security → App &amp; browser control → Smart App Control → select Off</b>. Defender (antivirus) stays active, and Smart App Control can be re-enabled later.
     </div>
   </section>
 
