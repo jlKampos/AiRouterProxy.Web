@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 470" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Local workflow: coding agent through AiRouterProxy to two models">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Local workflow: one coding agent through AiRouterProxy into multiple routes (AI Router and OpenRouter)">
   <defs>
     <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#181b26"/><stop offset="1" stop-color="#12141c"/>
@@ -13,7 +13,8 @@
       <stop offset="0" stop-color="#1c2131"/><stop offset="1" stop-color="#12141d"/>
     </linearGradient>
     <clipPath id="clipAgent"><rect x="28" y="120" width="215" height="130" rx="16"/></clipPath>
-    <clipPath id="clipRouter"><rect x="850" y="120" width="190" height="130" rx="16"/></clipPath>
+    <clipPath id="clipUpstreamA"><rect x="958" y="118" width="250" height="96" rx="14"/></clipPath>
+    <clipPath id="clipUpstreamB"><rect x="958" y="384" width="250" height="96" rx="14"/></clipPath>
     <marker id="aReq" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#4ea1ff"/>
     </marker>
@@ -106,85 +107,51 @@
     </g>
   </g>
 
-  <!-- ======= request arrow: proxy -&gt; AI Router ======= -->
-  <g>
-    <path d="M637,190 L847,190" stroke="#4ea1ff" stroke-width="2.5" fill="none" marker-end="url(#aReq)" stroke-linecap="round"/>
-    <text x="655" y="176" font-family="'JetBrains Mono',Consolas,monospace" font-size="11" fill="#22d3ee">POST /v1/chat/completions</text>
-    <rect x="645" y="210" width="200" height="21" rx="10" fill="rgba(78,161,255,0.10)" stroke="rgba(78,161,255,0.35)"/>
-    <text x="655" y="225" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#e8ecf4">Authorization: Bearer <tspan fill="#4ea1ff">sk-••••••</tspan></text>
+  <!-- ======= request arrows: proxy -&gt; upstreams (mirrors enterprise) ======= -->
+  <g fill="none">
+    <path d="M637,155 C720,155 780,166 955,166" stroke="url(#gReq)" stroke-width="2.2" marker-end="url(#aReq)" stroke-linecap="round"/>
+    <path d="M637,275 C720,275 780,420 955,420" stroke="url(#gReq)" stroke-width="2.2" marker-end="url(#aReq)" stroke-linecap="round"/>
+  </g>
+  <g font-family="'JetBrains Mono',Consolas,monospace">
+    <rect x="680" y="182" width="110" height="20" rx="9" fill="#1a2942" stroke="rgba(78,161,255,0.35)"/>
+    <text x="691" y="196" font-size="9.5" fill="#4ea1ff">default route</text>
+    <rect x="680" y="300" width="110" height="20" rx="9" fill="#143329" stroke="rgba(45,212,167,0.35)"/>
+    <text x="691" y="314" font-size="9.5" fill="#2dd4a7">/openrouter</text>
   </g>
 
-<!-- ======= AI Router node ======= -->
-<g>
-  <rect x="850" y="120" width="190" height="130" rx="16"
-        fill="url(#gCard)"
-        stroke="rgba(255,255,255,0.09)"/>
-
-  <rect x="850" y="120" width="190" height="3"
-        fill="#b48bfa"
-        clip-path="url(#clipRouter)"/>
-
-  <!-- Title bullet -->
-  <circle cx="874" cy="142" r="4" fill="#b48bfa"/>
-
-  <!-- Title -->
-  <text x="888" y="147"
-        font-family="'Inter',system-ui,sans-serif"
-        font-size="15"
-        font-weight="800"
-        fill="#e8ecf4">
-    AI Router
-  </text>
-
-  <!-- Subtitle -->
-  <text x="874" y="172"
-        font-family="'JetBrains Mono',Consolas,monospace"
-        font-size="10.5"
-        fill="#9aa3b5">
-    api.airouter.ch
-  </text>
-
-  <!-- Description -->
-  <text x="874" y="206"
-        font-family="'JetBrains Mono',Consolas,monospace"
-        font-size="10.5"
-        fill="#5c6577">
-    pick · load-balance
-  </text>
-</g>
-
-  <!-- ======= request arrows: AI Router -&gt; models ======= -->
+  <!-- ======= upstream cards (same output as enterprise) ======= -->
   <g>
-    <path d="M1040,140 C1070,140 1070,95 1096,95" stroke="url(#gReq)" stroke-width="2.5" fill="none" marker-end="url(#aReq)" stroke-linecap="round"/>
-    <path d="M1040,210 C1070,210 1070,205 1096,205" stroke="url(#gReq)" stroke-width="2.5" fill="none" marker-end="url(#aReq)" stroke-linecap="round"/>
+    <!-- AI Router -->
+    <rect x="958" y="118" width="250" height="96" rx="14" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="958" y="118" width="250" height="3" fill="#4ea1ff" clip-path="url(#clipUpstreamA)"/>
+    <circle cx="980" cy="140" r="4" fill="#4ea1ff"/>
+    <text x="994" y="145" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">AI Router</text>
+    <text x="1083" y="170" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">api.airouter.ch</text>
+    <text x="1083" y="186" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">route key · pick · fallback</text>
+    <text x="1083" y="202" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">DeepSeek-V4-Flash · Qwen3.8 …</text>
+
+    <!-- OpenRouter -->
+    <rect x="958" y="384" width="250" height="96" rx="14" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="958" y="384" width="250" height="3" fill="#2dd4a7" clip-path="url(#clipUpstreamB)"/>
+    <circle cx="980" cy="406" r="4" fill="#2dd4a7"/>
+    <text x="994" y="411" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">OpenRouter</text>
+    <text x="1083" y="436" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">openrouter.ai/api</text>
+    <text x="1083" y="452" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">route key · 100+ models</text>
   </g>
 
-  <!-- ======= model cards ======= -->
+  <!-- ======= response lane (SSE) ======= -->
   <g>
-    <rect x="1096" y="56" width="180" height="82" rx="14" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
-    <circle cx="1116" cy="78" r="4" fill="#4ea1ff"/>
-    <text x="1130" y="83" font-family="'Inter',system-ui,sans-serif" font-size="13.5" font-weight="700" fill="#e8ecf4">DeepSeek-V4-Flash</text>
-    <text x="1116" y="110" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">chat · SSE stream</text>
-
-    <rect x="1096" y="166" width="180" height="82" rx="14" fill="url(#gCard)" stroke="rgba(255,255,255,0.09)"/>
-    <circle cx="1116" cy="188" r="4" fill="#2dd4a7"/>
-    <text x="1130" y="193" font-family="'Inter',system-ui,sans-serif" font-size="13.5" font-weight="700" fill="#e8ecf4">Qwen3.8</text>
-    <text x="1116" y="220" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">chat · embed · whisper</text>
-  </g>
-
-  <!-- ======= response arrow (SSE) ======= -->
-  <g>
-    <path d="M1120,260 L1120,380 L150,380 L150,252" stroke="url(#gRes)" stroke-width="2.5" fill="none" marker-end="url(#aUp)" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="470" y="370" width="350" height="20" rx="10" fill="rgba(11,13,19,0.97)" stroke="rgba(45,212,167,0.25)"/>
-    <text x="645" y="384" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="11" fill="#2dd4a7">streamed response · SSE · notice injected</text>
+    <path d="M1140,486 L1140,520 L150,520 L150,252" stroke="url(#gRes)" stroke-width="2.5" fill="none" marker-end="url(#aUp)" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="470" y="510" width="350" height="20" rx="10" fill="rgba(11,13,19,0.97)" stroke="rgba(45,212,167,0.25)"/>
+    <text x="645" y="524" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="11" fill="#2dd4a7">streamed response · SSE · notice injected</text>
   </g>
 
   <!-- ======= legend ======= -->
   <g font-family="'JetBrains Mono',Consolas,monospace" font-size="11">
-    <circle cx="40" cy="436" r="4" fill="#4ea1ff"/>
-    <text x="52" y="440" fill="#9aa3b5">request path</text>
-    <circle cx="170" cy="436" r="4" fill="#2dd4a7"/>
-    <text x="182" y="440" fill="#9aa3b5">response path</text>
-    <text x="330" y="440" fill="#5c6577">one local client · one or two models</text>
+    <circle cx="40" cy="544" r="4" fill="#4ea1ff"/>
+    <text x="52" y="548" fill="#9aa3b5">request path</text>
+    <circle cx="170" cy="544" r="4" fill="#2dd4a7"/>
+    <text x="182" y="548" fill="#9aa3b5">response path</text>
+    <text x="330" y="548" fill="#5c6577">one local client · one gateway · many models across different routes</text>
   </g>
 </svg>
