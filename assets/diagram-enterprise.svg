@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Enterprise workflow: several employees through one central proxy into multiple AI routes">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Enterprise workflow: several employees through one central proxy into AI Router, OpenRouter and Anthropic">
   <defs>
     <clipPath id="clipUpstreamA"><rect x="958" y="118" width="250" height="96" rx="14"/></clipPath>
     <clipPath id="clipUpstreamB"><rect x="958" y="384" width="250" height="96" rx="14"/></clipPath>
+    <clipPath id="clipUpstreamC"><rect x="958" y="251" width="250" height="96" rx="14"/></clipPath>
     <clipPath id="clipEmpA"><rect x="24" y="40" width="215" height="118" rx="16"/></clipPath>
     <clipPath id="clipEmpB"><rect x="24" y="210" width="215" height="118" rx="16"/></clipPath>
     <clipPath id="clipEmpC"><rect x="24" y="380" width="215" height="118" rx="16"/></clipPath>
@@ -144,11 +145,14 @@
   <!-- ======= request arrows: proxy -&gt; upstreams ======= -->
   <g fill="none">
     <path d="M750,225 C810,225 810,166 955,166" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
+    <path d="M750,270 C810,270 810,300 955,300" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
     <path d="M750,315 C810,315 810,420 955,420" stroke="url(#gReq2)" stroke-width="2.2" marker-end="url(#aReq2)" stroke-linecap="round"/>
   </g>
   <g font-family="'JetBrains Mono',Consolas,monospace">
     <rect x="792" y="194" width="110" height="20" rx="9" fill="#1a2942" stroke="rgba(78,161,255,0.35)"/>
     <text x="803" y="208" font-size="9.5" fill="#4ea1ff">default route</text>
+    <rect x="792" y="264" width="110" height="20" rx="9" fill="#33221c" stroke="rgba(217,119,87,0.35)"/>
+    <text x="803" y="278" font-size="9.5" fill="#d97757">/anthropic</text>
     <rect x="792" y="335" width="110" height="20" rx="9" fill="#143329" stroke="rgba(45,212,167,0.35)"/>
     <text x="803" y="349" font-size="9.5" fill="#2dd4a7">/openrouter</text>
   </g>
@@ -171,6 +175,15 @@
     <text x="994" y="411" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">OpenRouter</text>
     <text x="1083" y="436" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">openrouter.ai/api</text>
     <text x="1083" y="452" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">route key · 100+ models</text>
+
+    <!-- Anthropic -->
+    <rect x="958" y="251" width="250" height="96" rx="14" fill="url(#gCard2)" stroke="rgba(255,255,255,0.09)"/>
+    <rect x="958" y="251" width="250" height="3" fill="#d97757" clip-path="url(#clipUpstreamC)"/>
+    <circle cx="980" cy="273" r="4" fill="#d97757"/>
+    <text x="994" y="278" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#e8ecf4">Anthropic</text>
+    <text x="1083" y="303" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#9aa3b5">api.anthropic.com</text>
+    <text x="1083" y="319" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">Claude Haiku · Sonnet</text>
+    <text x="1083" y="335" text-anchor="middle" font-family="'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#5c6577">route key · anthropic-version</text>
   </g>
 
   <!-- ======= response lane ======= -->

@@ -35,7 +35,7 @@
   <section class="hero sec">
     <div class="hero-head">
       <div class="badges">
-        <span class="badge b-blue"><span class="dot"></span>v2.3.1</span>
+        <span class="badge b-blue"><span class="dot"></span><span data-version>v2.4.0</span></span>
         <span class="badge b-purple"><span class="dot"></span>Open Source</span>
         <span class="badge b-teal"><span class="dot"></span>Local-first</span>
         <span class="badge"><span class="dot"></span>HTTPS&nbsp;·&nbsp;:4000</span>
@@ -83,7 +83,7 @@
       </div>
       <div class="card c-cyan reveal">
         <h3><span class="ico">⇄</span>Multi-upstream routing</h3>
-        <p>Longest-prefix <span class="mono">routes.json</span>: default route to your AI Router, <span class="mono">/openrouter</span> to OpenRouter — each with its own key and allowed-path guards.</p>
+        <p>Longest-prefix <span class="mono">routes.json</span>: default route to your AI Router, <span class="mono">/openrouter</span> to OpenRouter and <span class="mono">/anthropic</span> to Claude — each with its own key and allowed-path guards.</p>
       </div>
       <div class="card c-amber reveal">
         <h3><span class="ico">↯</span>Rate limit + lockout</h3>
@@ -104,7 +104,7 @@
       <p>Run it on your laptop. One agent, one gateway, many models across all your routes, all the guarantees.</p>
     </div>
     <div class="diagram-frame reveal">
-      <img src="assets/diagram-local.svg" alt="Local workflow: one coding agent through AiRouterProxy into multiple routes (AI Router and OpenRouter)" width="1320" height="560">
+      <img src="assets/diagram-local.svg" alt="Local workflow: one coding agent through AiRouterProxy into multiple routes (AI Router, OpenRouter and Anthropic)" width="1320" height="560">
     </div>
     <div class="chips">
       <span class="chip"><span class="d" style="--c:var(--blue)"></span><code>HTTPS&nbsp;:4000</code> local only</span>
@@ -123,7 +123,7 @@
       <p>A single central proxy gives every engineer their own key, per-client rate limits, a company-wide redaction policy and full visibility through <span class="mono">/admin</span> — while the routes diverge into different AI providers.</p>
     </div>
     <div class="diagram-frame reveal">
-      <img src="assets/diagram-enterprise.svg" alt="Enterprise workflow: three employees through one central proxy into different AI routes" width="1320" height="560">
+      <img src="assets/diagram-enterprise.svg" alt="Enterprise workflow: three employees through one central proxy into AI Router, OpenRouter and Anthropic" width="1320" height="560">
     </div>
     <p style="margin-top:16px"><a class="btn" href="enterprise.html">Enterprise deep-dive →</a></p>
   </section>

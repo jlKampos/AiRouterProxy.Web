@@ -66,7 +66,7 @@
         <div>
           <h4>Verify with your local key</h4>
           <div class="code" style="margin-top:10px"><pre><span class="g">$</span> curl -k https://localhost:4000/admin/health <span class="a">-H</span> "Authorization: Bearer <span class="c">&lt;LocalKey&gt;</span>"
-<span class="cmt"># {"status":"ok","version":"2.3.1","uptimeSec":…}</span></pre></div>
+<span class="cmt"># {"status":"ok","version":"<span data-version-trim>2.4.0</span>","uptimeSec":…}</span></pre></div>
         </div>
       </div>
       <div class="step reveal">
@@ -96,7 +96,11 @@
     <span class="p">"KeyRef"</span>: <span class="g">""</span> },
   { <span class="p">"Prefix"</span>: <span class="g">"/openrouter"</span>,
     <span class="p">"BaseUrl"</span>: <span class="g">"https://openrouter.ai/api"</span>,
-    <span class="p">"KeyRef"</span>: <span class="g">"OPENROUTER"</span> }
+    <span class="p">"KeyRef"</span>: <span class="g">"OPENROUTER"</span> },
+  { <span class="p">"Prefix"</span>: <span class="g">"/anthropic"</span>,
+    <span class="p">"BaseUrl"</span>: <span class="g">"https://api.anthropic.com"</span>,
+    <span class="p">"KeyRef"</span>: <span class="g">"ANTHROPIC"</span>,
+    <span class="p">"Headers"</span>: { <span class="p">"anthropic-version"</span>: <span class="g">"2023-06-01"</span> } }
 ]}
 
 <span class="cmt"># redaction.json  (hot-reload) — disable the noisy

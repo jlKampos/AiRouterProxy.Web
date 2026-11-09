@@ -40,7 +40,7 @@
 
   <section class="sec">
     <div class="diagram-frame reveal">
-      <img src="assets/diagram-local.svg" alt="Local workflow diagram: agent through AiRouterProxy into multiple routes (AI Router and OpenRouter)" width="1320" height="560">
+      <img src="assets/diagram-local.svg" alt="Local workflow diagram: agent through AiRouterProxy into multiple routes (AI Router, OpenRouter and Anthropic)" width="1320" height="560">
     </div>
     <div class="diagram-caption">One local client · one gateway · many models across different routes</div>
   </section>
@@ -103,6 +103,7 @@
         <tbody>
           <tr><td><code>""</code> (default)</td><td><code>https://api.airouter.ch</code></td><td>default route key</td><td><code>/v1/models</code>, <code>/v1/chat/completions</code>…</td></tr>
           <tr><td><code>/openrouter</code></td><td><code>https://openrouter.ai/api</code></td><td><code>OPENROUTER</code></td><td>100+ models</td></tr>
+          <tr><td><code>/anthropic</code></td><td><code>https://api.anthropic.com</code></td><td><code>ANTHROPIC</code></td><td>Claude Haiku · Sonnet</td></tr>
         </tbody>
       </table>
     </div>
