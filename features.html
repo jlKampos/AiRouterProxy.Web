@@ -35,7 +35,7 @@
   <section class="sec">
     <h1 class="title" style="font-size:clamp(30px,5vw,44px)">Everything in the box</h1>
     <div class="h2-rule"></div>
-    <p class="sub">A complete local gateway. No databases, no dashboards to host — a single Windows service with hot-reloadable config.</p>
+    <p class="sub">A complete local gateway. No databases, no separate service to host - the admin dashboard is embedded in the same Windows service, with hot-reloadable config.</p>
   </section>
 
   <section class="sec">
@@ -70,7 +70,7 @@
       </div>
       <div class="card c-teal reveal">
         <h3><span class="ico">☰</span>Admin surface</h3>
-        <p><code>/admin/health</code>, <code>/admin/endpoints</code>, <code>/admin/activity</code>, <code>/admin/refusals</code>, <code>/admin/logs</code> — every response masks secrets.</p>
+        <p>A self-hosted dashboard at <code>/admin/ui</code> (Routes &amp; Keys, Activity, Security, Settings) plus an admin REST API v1 (<code>/admin/api/v1/*</code>) - keys are write-only: fingerprints, never values. Legacy <code>/admin/*</code> endpoints stay.</p>
       </div>
       <div class="card c-purple reveal">
         <h3><span class="ico">↻</span>Hot-reload config</h3>
