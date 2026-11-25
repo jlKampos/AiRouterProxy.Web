@@ -88,7 +88,7 @@
         <div class="n"></div>
         <div>
           <h4>Forward + SSE streaming</h4>
-          <p>The request goes out through a pooled client; <code>X-AIRouter-Redacted</code> and a notice signal any redaction, and OpenAI / Anthropic / generic SSE is streamed back token by token.</p>
+          <p>The request goes out through a pooled client; <code>X-AIRouter-Redacted</code> and a single-line notice (count + categories, e.g. <code>OpenAI key × 6</code>) signal any redaction, and OpenAI / Anthropic / generic SSE is streamed back token by token.</p>
         </div>
       </div>
     </div>
@@ -107,13 +107,14 @@
         </tbody>
       </table>
     </div>
+    <p style="margin-top:10px" class="note teal"><b>Never masks less:</b> when two detectors overlap, the candidates are merged and the union is masked — a span that absorbed a known-format match is never exempted as base64.</p>
     <p style="margin-top:14px" class="note teal"><b>Hot reload:</b> <code>routes.json</code> and <code>redaction.json</code> are picked up live — no service restart needed. Rate-limit settings are read at startup.</p>
     <p style="margin-top:10px" class="note teal"><b>Precedence:</b> config files load in order — <code>appsettings.json</code>, <code>appsettings.Server.json</code>, then <code>redaction.json</code>/<code>routes.json</code>. Later files win <i>per key</i> across both. In practice: tune redaction in <code>redaction.json</code> and it beats any <code>appsettings.json</code> default for the same key.</p>
   </section>
 
   <section class="sec">
     <div class="note reveal">
-      <b>Always visible:</b> the proxy never stores the request body, never stores keys, and the <code>/admin</code> surface always reports the redaction state <i>masked</i> — bullets, never values.
+      <b>Always visible:</b> the proxy never stores the request body, never stores keys, and the <code>/admin</code> surface always reports the redaction state <i>masked</i> — bullets, never values. When forensics is enabled it keeps <b>metadata only</b> (path, layer, kind, length, fingerprint) — never the value or the body.
     </div>
     <div class="chips" style="margin-top:16px">
       <a class="chip" href="features.html" style="text-decoration:none">→ Features</a>

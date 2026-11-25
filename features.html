@@ -70,7 +70,11 @@
       </div>
       <div class="card c-teal reveal">
         <h3><span class="ico">☰</span>Admin surface</h3>
-        <p>A self-hosted dashboard at <code>/admin/ui</code> (Routes &amp; Keys, Activity, Security, Settings) plus an admin REST API v1 (<code>/admin/api/v1/*</code>) - keys are write-only: fingerprints, never values. Legacy <code>/admin/*</code> endpoints stay.</p>
+        <p>A self-hosted dashboard at <code>/admin/ui</code> (Routes &amp; Keys, Activity, Security, Settings) plus an admin REST API v1 (<code>/admin/api/v1/*</code>) - keys are write-only: fingerprints, never values. Legacy <code>/admin/*</code> endpoints stay. Security also carries <b style="color:var(--text)">detection forensics</b>: metadata-only triage (JSON paths, layers, short fingerprints — never the value), exposed as <code>GET/DELETE /admin/api/v1/detections</code>.</p>
+      </div>
+      <div class="card c-teal reveal">
+        <h3><span class="ico">◈</span>Detection forensics</h3>
+        <p>Opt-in, off by default: per-detection metadata — JSON path, layer, kind, masked-span length, an ephemeral 8-char fingerprint and the pattern shape (<code>token =</code>, <code>api_key : "…"</code>). In memory only, never the value, never the body.</p>
       </div>
       <div class="card c-purple reveal">
         <h3><span class="ico">↻</span>Hot-reload config</h3>
@@ -100,6 +104,7 @@
         <div><h4>Long high-entropy tokens</h4><p>Optional (configurable) layer for URL-safe tokens ≥ 28 chars that look random — with an <code>allow</code> list to keep file names and IDs readable.</p></div>
       </div>
     </div>
+    <p style="margin-top:14px;color:var(--muted);font-size:13.5px">Overlapping candidates are merged and the union is masked, so the proxy never masks less than any single detector would; the response notice is a single line with the count and the categories.</p>
   </section>
 
   <section class="sec">

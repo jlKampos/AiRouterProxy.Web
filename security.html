@@ -55,6 +55,7 @@
       <div class="card c-purple reveal">
         <h3><span class="ico">◈</span>Admin never leaks</h3>
         <p><code>/admin/endpoints</code> shows the redaction state as bullets. Activity and logs never echo key material. The mask itself is never returned as a real value.</p>
+        <p><b style="color:var(--text)">Detection forensics</b> (opt-in, off by default) records <b style="color:var(--text)">metadata only</b>: the structural JSON path, the layer, the kind, the masked-span length, an ephemeral 8-char fingerprint and the pattern shape. It never stores the value, the body or a snippet, lives in memory only and is cleared when disabled.</p>
       </div>
       <div class="card c-cyan reveal">
         <h3><span class="ico">↯</span>Brute-force lockout</h3>
@@ -87,6 +88,8 @@
           <tr><td><code>GET /admin/activity</code></td><td>request log (redacted counts)</td><td>never verbose content</td></tr>
           <tr><td><code>GET /admin/refusals</code></td><td>auth refusals only</td><td>hashes, no keys</td></tr>
           <tr><td><code>GET/DELETE /admin/logs</code></td><td>event log access</td><td>Bearer only</td></tr>
+          <tr><td><code>GET/PUT /admin/api/v1/security</code></td><td>redaction, inspection and forensics settings</td><td>Bearer + validated write to <code>redaction.json</code></td></tr>
+          <tr><td><code>GET/DELETE /admin/api/v1/detections</code></td><td>detection forensics (metadata only)</td><td>path/layer/kind/length/fingerprint — never the value</td></tr>
         </tbody>
       </table>
     </div>

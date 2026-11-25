@@ -71,7 +71,11 @@
       </div>
       <div class="card c-amber reveal">
         <h3><span class="ico">☰</span>One admin surface</h3>
-        <p>A self-hosted dashboard (<code>/admin/ui</code>) and an admin REST API v1 (<code>/admin/api/v1/*</code>) cover routes, keys, activity, redaction state and refusals - all under <code>/admin</code>, protected by the same local key, and <b style="color:var(--text)">never leaking key values</b>.</p>
+        <p>A self-hosted dashboard (<code>/admin/ui</code>) and an admin REST API v1 (<code>/admin/api/v1/*</code>) cover routes, keys, activity, redaction state, refusals and detection forensics - all under <code>/admin</code>, protected by the same local key, and <b style="color:var(--text)">never leaking key values</b>.</p>
+      </div>
+      <div class="card c-teal reveal">
+        <h3><span class="ico">◈</span>Triage without storing secrets</h3>
+        <p>Detection forensics answers “what fired and where” with JSON paths, layers and short fingerprints — never values. Off by default, in memory only, never written to disk.</p>
       </div>
       <div class="card c-green reveal">
         <h3><span class="ico">≋</span>SSE preserved</h3>
